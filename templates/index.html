@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section>
+  <div class="row m-0 my-3">
+    {% for produk in data %}
+    {% if produk.best_seller %} 
+    <div class="col-md-3 p-0 mb-2">
+      <div class="card border-primary">
+        <div class="ribbon ribbon-top-left"><span>BEST SELLER!</span></div>
+        <div class="card-header bg-primary text-center border-0">
+          <h5 class="font-weight-bold text-white text-capitalize">{{ produk.name }}</h5>
+        </div>
+        <div class="card-header text-center bg-primary text-white border-0">
+          <s>Rp. {{ produk.price_normaly | number_format(0, '.', '.')  }}</s>
+          <br>
+          {% set classes = produk.price_normaly |number_format(0, '.', '.') |split('.',2) %}
+
+          Rp <b style="font-size: 35px;">{{ classes[0] }}</b>.{{ classes[1] }} / bulan
+        </div>
+        <div class="card-header bg-primary-100 text-center text-white">
+          <label class="m-auto" >{{ produk.users_count |number_format(0, '.', '.') }} Penguna Terdaftar</label>
+        </div>
+        <div class="card-body text-center">
+          <ul class="list-unstyled text-capitalize">
+            {% for details in produk.detail %}
+            <li class="py-1 text-capitalize"><b class="mr-2 text-capitalize">{{ details.item_quota }}</b>{{ details.item_name }}</li>
+            {% endfor %}
+          </ul>
+
+          {% if produk.discount!=null %} 
+          <a href="#" class="btn btn-white border-dark text-dark font-weight-bold rounded-pill px-4 mt-4">Diskon {{ produk.discount }}%</a>
+          {% else %}
+          <a href="#" class="btn btn-primary border-primary text-white font-weight-bold rounded-pill px-4 mt-4">Pilih Sekarang</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="col-md-3 p-0 mb-2">
+      <div class="card border-light">
+        <div class="card-header bg-white text-center border-light">
+          <h5 class="font-weight-bold text-capitalize">{{ produk.name }}</h5>
+        </div>
+        <div class="card-header bg-white text-center border-light">
+          <s>Rp. {{ produk.price_normaly | number_format(0, '.', '.') }}</s>
+          <br>
+          {% set classes = produk.price_normaly |number_format(0, '.', '.') |split('.') %}
+           Rp <b style="font-size: 35px;">{{ classes[0] }}</b>.{{ classes[1] }} / bulan
+        </div>
+        <div class="card-header bg-white text-center border-light">
+          <label class="m-auto" >{{ produk.users_count |number_format(0, '.', '.') }} Penguna Terdaftar</label>
+        </div>
+        <div class="card-body text-center">
+          <ul class="list-unstyled">
+            {% for details in produk.detail %}
+            <li class="py-1 text-capitalize"><b class="mr-2 text-capitalize">{{ details.item_quota }}</b>{{ details.item_name | raw }}</li>
+            {% endfor %}
+          </ul>
+
+          {% if produk.discount!=null %} 
+          <a href="#" class="btn btn-white border-dark text-dark font-weight-bold rounded-pill px-4 mt-4">Diskon {{ produk.discount }}%</a>
+          {% else %}
+          <a href="#" class="btn btn-white border-dark text-dark font-weight-bold rounded-pill px-4 mt-4">Pilih Sekarang</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}
