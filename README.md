@@ -8,6 +8,6 @@ adiferiismail@gmail.com
 - google font (Montserrat+Roboto)
 - easyshare (for button count share )
 
-## demo url see webpage [here](http://fdt.ampmpanel.com/)
+## demo url see webpage [here](https://pretest.adiferiismail.com)
 
 
